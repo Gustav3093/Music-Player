@@ -1,0 +1,46 @@
+#Music Player
+from tkinter import * 
+from tkinter import filedialog 
+from pygame import mixer
+
+class music:
+    def __init__(self,ventana):
+        ventana.geometry("270x270")
+        ventana.tittle("MediaPlayer")
+        ventana.config(bg="green", relief= "ridge", bd="25")
+        
+        abr=Button(ventana,text="Abrir",width=10, bg="red",relief="groove",bd="4", command=self.abrir)
+        abr.place(x=60,y=50)
+        repro= Button(ventana,text="Reproducir",width=10, bg="red",relief="groove",bd="4", command= self.reproducir)
+        repro.place(x=60,y=90)
+        pausar=Button(ventana,text="Pausar",width=10, bg="red",relief="groove",bd="4",command=self.pausar)
+        pausar.place(x=60,y=130)
+        detener=Button(ventana,text="Detener",width=10, bg="red",relief="groove",bd="4",command= self.detener)
+        detener.place(x=60,y=170)
+        self.op_music=False
+        self.play.music=False
+
+    def abrir(self):
+        self.open.music=filedialog.askopenfilename()
+    def reproducir(self):
+        if self.repro_music:
+            mixer.init()
+            mixer.music.load(self.open_music)
+            mixer.music.play()
+    def pausar(self):
+        if self.repro_music:
+            mixer.music.pause()
+            self.repro_music=False
+        else:
+            mixer.music.unpause()
+            self.repro_music=True
+    def detener(self):
+        mixer.music.stop()
+        
+        
+        
+ventana= Tk()
+imagen=PhotoImage(file="icono.png")
+Label(window,image=imagen).place(x=85,y=0)
+music(window)
+window.mainloop()  
